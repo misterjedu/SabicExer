@@ -1,7 +1,7 @@
 package com.jedun.sabipay.common.domain.repository
 
 import androidx.paging.PagingData
-import com.jedun.sabipay.common.domain.model.Article
+import com.jedun.sabipay.articles.domain.model.Article
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {

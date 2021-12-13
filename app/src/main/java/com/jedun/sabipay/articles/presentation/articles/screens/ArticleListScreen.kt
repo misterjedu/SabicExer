@@ -12,7 +12,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.jedun.sabipay.articles.presentation.articles.ArticlesViewModel
 import com.jedun.sabipay.articles.presentation.articles.components.ImageCard
-import com.jedun.sabipay.common.domain.model.Article
+import com.jedun.sabipay.articles.presentation.articles.model.UiArticle
 
 @Composable
 fun ArticleListScreen(
@@ -21,12 +21,13 @@ fun ArticleListScreen(
 ) {
 
     val context = LocalContext.current
-
-    val articleListItem: LazyPagingItems<Article> =
-        viewModel.pagingData.collectAsLazyPagingItems()
+    val articleListItem: LazyPagingItems<UiArticle> =
+        viewModel.state.value.articles.collectAsLazyPagingItems()
 
     LazyColumn {
-        items(items = articleListItem) { article ->
+        items(
+            items = articleListItem,
+        ) { article ->
             article?.let { it ->
                 ImageCard(
                     imageUrl = it.urlToImage,
@@ -44,3 +45,4 @@ fun ArticleListScreen(
         }
     }
 }
+

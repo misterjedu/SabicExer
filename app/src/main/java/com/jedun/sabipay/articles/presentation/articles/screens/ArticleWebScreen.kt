@@ -18,6 +18,5 @@ fun ArticleWebScreen(
     val customTabsIntent = customIntent.build()
 
     customTabsIntent.launchUrl(LocalContext.current, Uri.parse(url))
-    navController.popBackStack()
 
 }

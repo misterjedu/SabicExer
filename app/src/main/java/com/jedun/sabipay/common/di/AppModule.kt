@@ -63,7 +63,7 @@ abstract class AppModule {
 
         @Provides
         @Singleton
-        fun providePixaBayService(retrofit: Retrofit): NewsApi {
+        fun provideNewsService(retrofit: Retrofit): NewsApi {
             return retrofit.create(NewsApi::class.java)
         }
 

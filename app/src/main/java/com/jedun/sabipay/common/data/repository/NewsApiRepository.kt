@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.jedun.sabipay.articles.presentation.articles.ArticleSource
-import com.jedun.sabipay.common.domain.model.Article
+import com.jedun.sabipay.articles.domain.model.Article
 import com.jedun.sabipay.common.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

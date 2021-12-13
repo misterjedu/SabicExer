@@ -1,4 +1,4 @@
-package com.jedun.sabipay.common.utils
+package com.jedun.sabipay.common.domain.utils
 
 interface iDomainMapper<Dto, DomainModel> {
 

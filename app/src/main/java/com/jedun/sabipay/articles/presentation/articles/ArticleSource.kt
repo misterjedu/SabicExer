@@ -3,8 +3,8 @@ package com.jedun.sabipay.articles.presentation.articles
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.jedun.sabipay.common.data.network.NewsApi
-import com.jedun.sabipay.common.domain.mappers.DomainArticleMapper
-import com.jedun.sabipay.common.domain.model.Article
+import com.jedun.sabipay.articles.domain.mappers.DomainArticleMapper
+import com.jedun.sabipay.articles.domain.model.Article
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -23,6 +23,7 @@ class ArticleSource @Inject constructor(
         return try {
             val nextPage = params.key ?: 1
             val articleList = apiService.getBreakingNews(nextPage)
+            articleList.page = nextPage
             LoadResult.Page(
                 data = articleList.articles.map { dtoToDomainMapper.mapToDomain(it) },
                 prevKey = if (nextPage == 1) null else nextPage - 1,
@@ -34,4 +35,5 @@ class ArticleSource @Inject constructor(
             return LoadResult.Error(exception)
         }
     }
+
 }

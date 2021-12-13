@@ -1,4 +1,4 @@
-package com.jedun.sabipay.common.presentation.model
+package com.jedun.sabipay.articles.presentation.articles.model
 
 data class UiArticle(
     val title: String?,
