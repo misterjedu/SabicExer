@@ -5,7 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jedun.sabipay.articles.presentation.articles.ArticlesViewModel
 
 @Composable
-fun Buts(
+fun Nuts(
     viewModel: ArticlesViewModel = hiltViewModel()
 ) {
     println(viewModel.state.value)

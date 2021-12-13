@@ -4,36 +4,51 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.jedun.sabipay.articles.domain.usescases.GetArticlesUseCase
+import com.jedun.sabipay.common.domain.model.Article
+import com.jedun.sabipay.common.presentation.mapper.UiArticleMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ArticlesViewModel @Inject constructor(
-    private val articlesUseCase: GetArticlesUseCase
-) : ViewModel() {
+    private val articlesUseCase: GetArticlesUseCase,
+    private val mapper: UiArticleMapper,
+    private val articleSource: ArticleSource,
+
+    ) : ViewModel() {
 
     private var getArticlesJob: Job? = null
 
     private val _state = mutableStateOf(ArticleListState())
+
+    var pagingData: Flow<PagingData<Article>> = Pager(PagingConfig(pageSize = 10)) {
+        articleSource
+    }.flow.cachedIn(viewModelScope)
+
     val state: State<ArticleListState> = _state
 
+//    init {
+//        getArticles()
+//    }
 
-    init {
-        getArticles(1)
-    }
+//    var ppp: Flow<PagingData<Article>> =
 
-    fun getArticles(page: Int) {
+
+    fun getArticles() {
         getArticlesJob?.cancel()
         getArticlesJob = viewModelScope.launch {
-            articlesUseCase(page).collect { articles ->
-                _state.value = state.value.copy(
-                    articles = articles
-                )
-            }
+            pagingData = articlesUseCase()
+//            _state.value = state.value.copy(
+//                articles = articlesUseCase(page)
+//            )
         }
     }
 
