@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SabiPay</string>
+    <string name="news_feed">Newsfeed</string>
+    <string name="top_news">Top News</string>
 </resources>

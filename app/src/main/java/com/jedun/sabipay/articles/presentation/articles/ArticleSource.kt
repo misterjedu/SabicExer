@@ -3,7 +3,7 @@ package com.jedun.sabipay.articles.presentation.articles
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.jedun.sabipay.common.data.network.NewsApi
-import com.jedun.sabipay.articles.domain.mappers.DomainArticleMapper
+import com.jedun.sabipay.articles.data.mappers.DomainArticleMapper
 import com.jedun.sabipay.articles.domain.model.Article
 import retrofit2.HttpException
 import java.io.IOException
