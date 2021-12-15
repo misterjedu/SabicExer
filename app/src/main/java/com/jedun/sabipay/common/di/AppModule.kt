@@ -1,5 +1,6 @@
 package com.jedun.sabipay.common.di
 
+import com.jedun.sabipay.BuildConfig
 import com.jedun.sabipay.articles.presentation.articles.ArticleSource
 import com.jedun.sabipay.common.data.network.NetworkConstants
 import com.jedun.sabipay.common.data.network.NewsApi
@@ -26,7 +27,9 @@ abstract class AppModule {
         @Provides
         @Singleton
         fun provideLogger(): HttpLoggingInterceptor {
-            return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            return if (BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) else HttpLoggingInterceptor().setLevel(
+                HttpLoggingInterceptor.Level.NONE
+            )
         }
 
         @Provides
