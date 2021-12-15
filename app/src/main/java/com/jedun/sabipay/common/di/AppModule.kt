@@ -1,9 +1,10 @@
 package com.jedun.sabipay.common.di
 
+import com.jedun.sabipay.BuildConfig
+import com.jedun.sabipay.articles.presentation.articles.ArticleSource
 import com.jedun.sabipay.common.data.network.NetworkConstants
 import com.jedun.sabipay.common.data.network.NewsApi
 import com.jedun.sabipay.common.data.repository.NewsApiRepository
-import com.jedun.sabipay.common.domain.mappers.DomainArticleMapper
 import com.jedun.sabipay.common.domain.repository.NewsRepository
 import dagger.Module
 import dagger.Provides
@@ -26,7 +27,9 @@ abstract class AppModule {
         @Provides
         @Singleton
         fun provideLogger(): HttpLoggingInterceptor {
-            return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            return if (BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) else HttpLoggingInterceptor().setLevel(
+                HttpLoggingInterceptor.Level.NONE
+            )
         }
 
         @Provides
@@ -63,14 +66,14 @@ abstract class AppModule {
 
         @Provides
         @Singleton
-        fun providePixaBayService(retrofit: Retrofit): NewsApi {
+        fun provideNewsService(retrofit: Retrofit): NewsApi {
             return retrofit.create(NewsApi::class.java)
         }
 
         @Provides
         @Singleton
-        fun provideRepository(newsApi: NewsApi, mapper: DomainArticleMapper): NewsRepository {
-            return NewsApiRepository(newsApi, mapper)
+        fun provideRepository(articleSource: ArticleSource): NewsRepository {
+            return NewsApiRepository(articleSource)
         }
     }
 

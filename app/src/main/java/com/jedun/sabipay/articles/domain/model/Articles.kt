@@ -1,4 +1,4 @@
-package com.jedun.sabipay.common.domain.model
+package com.jedun.sabipay.articles.domain.model
 
 data class Article(
     val title: String?,

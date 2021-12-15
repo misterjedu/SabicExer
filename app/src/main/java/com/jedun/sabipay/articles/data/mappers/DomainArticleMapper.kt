@@ -1,12 +1,11 @@
-package com.jedun.sabipay.common.domain.mappers
+package com.jedun.sabipay.articles.data.mappers
 
+import com.jedun.sabipay.articles.domain.model.Article
 import com.jedun.sabipay.common.data.network.data.NewsArticleDto
-import com.jedun.sabipay.common.domain.model.Article
-import com.jedun.sabipay.common.utils.iDomainMapper
+import com.jedun.sabipay.common.domain.utils.iDomainMapper
 import javax.inject.Inject
 
 class DomainArticleMapper @Inject constructor() : iDomainMapper<NewsArticleDto, Article> {
-
     override fun mapToDomain(entity: NewsArticleDto): Article {
         return Article(
             title = entity.title,
@@ -15,5 +14,4 @@ class DomainArticleMapper @Inject constructor() : iDomainMapper<NewsArticleDto, 
             urlToImage = entity.urlToImage
         )
     }
-
 }
